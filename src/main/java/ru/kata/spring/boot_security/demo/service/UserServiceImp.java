@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repositories.UserRepositories;
-
-
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@Transactional
 public class UserServiceImp implements UserDetailsService, UserService {
 
     private final UserRepositories userRepositories;
     private final PasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     public UserServiceImp(UserRepositories userRepositories, @Lazy PasswordEncoder bCryptPasswordEncoder) {
         this.userRepositories = userRepositories;
@@ -29,9 +29,9 @@ public class UserServiceImp implements UserDetailsService, UserService {
     @Override
     @Transactional
     public void updateUser(User user) {
-        if (!user.getPassword().equals(Objects.requireNonNull(userRepositories.findById(user.getId()).orElse(null)).getPassword())){
+        if (!user.getPassword().equals(Objects.requireNonNull(userRepositories.findById(user.getId()).orElse(null)).getPassword())) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        }else {
+        } else {
             user.setPassword(Objects.requireNonNull(userRepositories.findById(user.getId()).orElse(null)).getPassword());
         }
 
@@ -79,12 +79,11 @@ public class UserServiceImp implements UserDetailsService, UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepositories.findByEmail(username);
-
+        User user = findByName(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found!");
+            throw new UsernameNotFoundException(String.format("User '%s' not found", username));
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(), user.getRoles());
+                user.getPassword(), user.getAuthorities());
     }
 }
