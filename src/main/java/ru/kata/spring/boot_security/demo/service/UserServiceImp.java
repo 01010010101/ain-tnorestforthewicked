@@ -10,80 +10,67 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repositories.UserRepositories;
+
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @Service
-@Transactional
 public class UserServiceImp implements UserDetailsService, UserService {
 
     private final UserRepositories userRepositories;
-    private final PasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImp(UserRepositories userRepositories, @Lazy PasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImp(UserRepositories userRepositories, @Lazy PasswordEncoder passwordEncoder) {
         this.userRepositories = userRepositories;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    @Transactional
-    public void updateUser(User user) {
-        if (!user.getPassword().equals(Objects.requireNonNull(userRepositories.findById(user.getId()).orElse(null)).getPassword())) {
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        } else {
-            user.setPassword(Objects.requireNonNull(userRepositories.findById(user.getId()).orElse(null)).getPassword());
-        }
 
+    @Transactional
+    public void updateUser(int id, User user) {
+        user.setId(id);
         userRepositories.save(user);
     }
 
 
-    @Override
     public User getUserAtId(Integer id) {
-        return userRepositories.findById(id).orElse(null);
+        Optional<User> findUser = userRepositories.findById(id);
+        return findUser.orElse(null);
     }
 
-    @Override
-    public void updateUser(int id, User user) {
 
-    }
-
-    @Override
     @Transactional
     public void saveUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepositories.save(user);
     }
+    //I'm doing this piece of shit for 7th times, a lil' bit more and i'm quit
 
-    @Override
     @Transactional
     public void removeUserById(Integer id) {
         userRepositories.delete(getUserAtId(id));
     }
 
-    @Override
+
     public List<User> getAllUsers() {
         return userRepositories.findAll();
     }
 
-    @Override
+
     public User findByName(String name) {
         return userRepositories.findByName(name);
     }
 
-    @Override
-    public User findByEmail(String username) {
-        return userRepositories.findByEmail(username);
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByName(username);
-        if (user == null) {
+        if(user==null) {
             throw new UsernameNotFoundException(String.format("User '%s' not found", username));
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
                 user.getPassword(), user.getAuthorities());
+
     }
 }
