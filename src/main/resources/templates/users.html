@@ -6,12 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
 <body>
-
 
 <header>
     <div class="container-fluid" style="padding: 0">
@@ -37,13 +35,8 @@
     </div>
 </header>
 
-
-
 <div class="container-fluid">
     <div class="row">
-
-
-
         <div class="col-2" style="padding: 0; padding-top: 15px">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
@@ -55,12 +48,8 @@
             </ul>
         </div>
 
-
-
         <div class="col-10 bg-light">
             <div class="tab-content" style="padding-top: 15px; height: 100vh">
-
-
 
                 <div class="tab-pane fade show active" id="adminPanel">
                     <h2>Admin panel</h2>
@@ -85,9 +74,9 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>First Name</th>
-                                            <th>Last Name</th>
+                                            <th>Password</th>
+                                            <th>City</th>
                                             <th>Email</th>
-                                            <th>Age</th>
                                             <th>Role</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
@@ -100,8 +89,6 @@
                             </div>
                         </div>
 
-
-
                         <div class="tab-pane fade" id="newUser">
                             <div class="form-group">
                                 <div class="control-group required">
@@ -111,38 +98,28 @@
                                             <div class="form justify-content-center mx-auto col-5">
                                                 <form id="formNewUser" name="formNewUser">
                                                     <p>
-                                                        <label class="container-fluid" for="newUserName"><strong>Name</strong>
-                                                            <input class="form-control" type="text" name="name"
-                                                                   id="newUserName"/>
+                                                        <label class="container-fluid" for="newUserFirstName"><strong>First Name</strong>
+                                                            <input class="form-control" type="text" name="firstName"
+                                                                   id="newUserFirstName"/>
                                                         </label>
                                                     </p>
                                                     <p>
-                                                        <label class="container-fluid" for="newUserSurname"><strong>Last name</strong>
-                                                            <input class="form-control" type="text" name="surname"
-                                                                   id="newUserSurname"/>
+                                                        <label class="container-fluid" for="newUserPassword"><strong>Password</strong>
+                                                            <input class="form-control" type="password" name="password"
+                                                                   id="newUserPassword"/>
                                                         </label>
                                                     </p>
-
-
+                                                    <p>
+                                                        <label class="container-fluid" for="newUserCity"><strong>City</strong>
+                                                        <input class="form-control" type="text" name="city"
+                                                        id="newUserCity"/>
+                                                        </label>
+                                                    </p>
                                                     <p>
                                                         <label class="container-fluid"
                                                                for="newUserEmail"><strong>Email</strong>
                                                             <input class="form-control" type="email" name="email"
                                                                    id="newUserEmail"/>
-                                                        </label>
-                                                    </p>
-
-                                                    <p>
-                                                        <label class="container-fluid"
-                                                               for="newUserAge"><strong>Age</strong>
-                                                            <input class="form-control" type="number" name="age"
-                                                                   id="newUserAge"/>
-                                                        </label>
-                                                    </p>
-                                                    <p>
-                                                        <label class="container-fluid" for="newUserPassword"><strong>Password</strong>
-                                                            <input class="form-control" type="password" name="password" required minlength="3"
-                                                                   id="newUserPassword"/>
                                                         </label>
                                                     </p>
                                                     <label class="container-fluid"
@@ -176,9 +153,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>Password</th>
+                                    <th>City</th>
                                     <th>Email</th>
-                                    <th>Age</th>
                                     <th>Role</th>
                                 </tr>
                                 </thead>
@@ -192,6 +169,8 @@
         </div>
     </div>
 </div>
+
+
 
 <div class="modal fade" id="edit" tabindex="-1" role="dialog"
      aria-labelledby="editModalLabel" aria-hidden="true">
@@ -213,30 +192,23 @@
                                 </label>
                             </p>
                             <p>
-                                <label for="nameEditUser"><strong>First name</strong>
-                                    <input class="form-control" type="text" name="name" id="nameEditUser" />
-                                </label>
-                            </p>
-                            <p>
-                                <label for="surnameEditUser"><strong>Last name</strong>
-                                    <input class="form-control" type="text" name="surname" id="surnameEditUser" />
-                                </label>
-                            </p>
-
-
-                            <p>
-                                <label for="emailEditUser"><strong>Email</strong>
-                                    <input class="form-control" type="email" name="email" id="emailEditUser" />
-                                </label>
-                            </p>
-                            <p>
-                                <label for="ageEditUser"><strong>Age</strong>
-                                    <input class="form-control" type="number" name="age" id="ageEditUser" />
+                                <label for="firstNameEditUser"><strong>First name</strong>
+                                    <input class="form-control" type="text" name="firstName" id="firstNameEditUser" />
                                 </label>
                             </p>
                             <p>
                                 <label for="passwordEditUser"><strong>Password</strong>
-                                    <input class="form-control" type="password" name="password" id="passwordEditUser" required minlength="3" />
+                                    <input class="form-control" type="password" name="password" id="passwordEditUser" required/>
+                                </label>
+                            </p>
+                            <p>
+                                <label for="cityEditUser"><strong>City</strong>
+                                    <input class="form-control" type="text" name="city" id="cityEditUser" />
+                                </label>
+                            </p>
+                            <p>
+                                <label for="emailEditUser"><strong>Email</strong>
+                                    <input class="form-control" type="email" name="email" id="emailEditUser"/>
                                 </label>
                             </p>
                             <label class="container-fluid col-6" for="rolesEditUser"><strong>Role</strong>
@@ -256,6 +228,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="delete" tabindex="-1" role="dialog"
      aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -277,24 +250,23 @@
                             </p>
                             <p>
                                 <label for="firstNameDeleteUser"><strong>First name</strong>
-                                    <input class="form-control" type="text" name="name" id="firstNameDeleteUser" disabled>
+                                    <input class="form-control" type="text" name="firstName" id="firstNameDeleteUser" disabled>
                                 </label>
                             </p>
                             <p>
-                                <label for="lastNameDeleteUser"><strong>Last name</strong>
-                                    <input class="form-control" type="text" name="surname" id="lastNameDeleteUser" disabled>
+                                <label for="passwordDeleteUser"><strong>Password</strong>
+                                    <input class="form-control" type="password" name="password" id="passwordDeleteUser" disabled>
                                 </label>
                             </p>
 
+                            <p>
+                                <label for="cityDeleteUser"><strong>City</strong>
+                                    <input class="form-control" type="text" name="city" id="cityDeleteUser" disabled>
+                                </label>
+                            </p>
                             <p>
                                 <label for="emailDeleteUser"><strong>Email</strong>
                                     <input class="form-control" type="email" name="email" id="emailDeleteUser" disabled>
-                                </label>
-                            </p>
-
-                            <p>
-                                <label for="ageDeleteUser"><strong>Age</strong>
-                                    <input class="form-control" type="number" name="age" id="ageDeleteUser" disabled>
                                 </label>
                             </p>
                             <label class="container-fluid col-6" for="rolesDeleteUser"><strong>Role</strong>
@@ -315,9 +287,6 @@
     </div>
 </div>
 
-
-<!-- Отдельные JS для Popper и Bootstrap -->
-
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -328,8 +297,12 @@
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
 
-<!-- JS -->
-<script type="text/javascript" src="/admin.js"></script>
-
+<script type="text/javascript" src="AddUser.js"></script>
+<script type="text/javascript" src="AllUsers.js"></script>
+<script type="text/javascript" src="DeleteModal.js"></script>
+<script type="text/javascript" src="DeleteUser.js"></script>
+<script type="text/javascript" src="EditModal.js"></script>
+<script type="text/javascript" src="EditUser.js"></script>
+<script type="text/javascript" src="UserPage.js"></script>
 </body>
 </html>
