@@ -1,5 +1,3 @@
-
-// <-- Все юзеры -->
 $(async function() {
     await allUsers();
 });

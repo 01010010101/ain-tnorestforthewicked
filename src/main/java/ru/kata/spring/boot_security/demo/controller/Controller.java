@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -11,15 +12,15 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.util.List;
 
-
-@RestController()
-public class RestController1 {
+@RestController
+public class Controller {
 
     private final UserService userService;
 
     private final RoleService roleService;
 
-    public RestController1(UserService userService, RoleService roleService) {
+    @Autowired
+    public Controller(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }

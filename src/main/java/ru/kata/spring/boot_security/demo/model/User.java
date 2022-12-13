@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,14 +28,13 @@ public class User implements UserDetails {
     private String surname;
 
     @Column
-    private String email;
-
-    @Column
     private String age;
 
     @Column
-    private String password;
+    private String email;
 
+    @Column
+    private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
@@ -56,12 +54,12 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String surname, String age, String password, String email) {
+    public User(String name, String surname, String age, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.age = age;
-        this.password = password;
         this.email = email;
+        this.password = password;
     }
 
     public Integer getId() {
@@ -96,16 +94,16 @@ public class User implements UserDetails {
         this.age = age;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void addRole(Role role) {
@@ -115,36 +113,37 @@ public class User implements UserDetails {
         roles.add(role);
     }
 
-    @JsonIgnore
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
     }
+
     @Override
     public String getPassword() {
         return password;
     }
-    @JsonIgnore
+
     @Override
     public String getUsername() {
         return name;
     }
-    @JsonIgnore
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-    @JsonIgnore
+
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-    @JsonIgnore
+
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-    @JsonIgnore
+
     @Override
     public boolean isEnabled() {
         return true;

@@ -45,7 +45,6 @@ public class UserServiceImp implements UserDetailsService, UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepositories.save(user);
     }
-    //I'm doing this piece of shit for 7th times, a lil' bit more and i'm quit
 
     @Transactional
     public void removeUserById(Integer id) {
