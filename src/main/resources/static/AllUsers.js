@@ -11,9 +11,9 @@ async function allUsers() {
                 let tableWithUsers = `$(
                         <tr>
                             <td>${user.id}</td>
-                            <td>${user.firstName}</td>
-                            <td>${user.password}</td>                                               
-                            <td>${user.city}</td>
+                            <td>${user.name}</td>
+                            <td>${user.surname}</td>                                               
+                            <td>${user.age}</td>
                             <td>${user.email}</td>
                             <td>${user.roles.map(role => " " + role.role.substring(5))}</td>
                             <td>
