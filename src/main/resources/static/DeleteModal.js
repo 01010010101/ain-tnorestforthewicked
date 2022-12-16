@@ -11,7 +11,7 @@ async function showDeleteModal(id) {
     form.name.value = user.name;
     form.surname.value = user.surname;
     form.password.value = user.password;
-    form.age.value = age.city;
+    form.age.value = user.age;
     form.email.value = user.email;
 
 

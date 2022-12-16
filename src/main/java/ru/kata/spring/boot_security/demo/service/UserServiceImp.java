@@ -28,9 +28,12 @@ public class UserServiceImp implements UserDetailsService, UserService {
 
 
     @Transactional
-    public void updateUser(int id, User user) {
-        user.setId(id);
-        userRepositories.save(user);
+    public void updateUser(User newUser) {
+        User oldUser = getUserAtId(newUser.getId());
+        if (!oldUser.getPassword().equals(newUser.getPassword())) {
+            newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        }
+        userRepositories.save(newUser);
     }
 
 
@@ -68,8 +71,6 @@ public class UserServiceImp implements UserDetailsService, UserService {
         if(user==null) {
             throw new UsernameNotFoundException(String.format("User '%s' not found", username));
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(), user.getAuthorities());
-
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
     }
 }

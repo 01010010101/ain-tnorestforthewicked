@@ -34,7 +34,7 @@ public class Controller {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> getById(@PathVariable Integer id) {
         User user = userService.getUserAtId(id);
 
@@ -73,7 +73,7 @@ public class Controller {
 
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
-        userService.updateUser(user.getId(), user);
+        userService.updateUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
